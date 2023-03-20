@@ -1,0 +1,46 @@
+<?php
+include('config.php');
+
+if(isset($_POST['login_user'])){
+
+	$nama = $_POST['nama'];
+	$pass = md5($_POST['sahkanKataLaluan']);                                                                                                                                                                                                                                                                                                                                          
+	$select_user = mysqli_query($db,"SELECT * FROM daftar WHERE nama = '$nama' AND kataLaluan = '$pass'");
+
+	if(mysqli_num_rows($select_user) > 0 ){
+		header("location: index.html");
+	}else{
+		echo "nama atau kata laluan anda salah!!";
+	}
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Log masuk</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <div class="header">
+  	<h2>Log masuk</h2>
+  </div>
+	 
+  <form method="post" action="">
+  	<div class="input-group">
+  		<label>Nama </label>
+  		<input type="text" name="nama" >
+  	</div>
+  	<div class="input-group">
+  		<label>Kata Laluan</label>
+  		<input type="password" name="sahkankatalaluan">
+  	</div>
+  	<div class="input-group">
+  		<button type="submit" class="btn" name="login_user">Log Masuk</button>
+  	</div>
+</form>
+<p>
+	Belum mendaftar <a href="daftar.php">Daftar</a>
+</p>
+</body>
+</html>
